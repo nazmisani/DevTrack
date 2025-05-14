@@ -1,0 +1,30 @@
+{
+  "name": "devtrack_server",
+  "version": "1.0.0",
+  "description": "<h1 align=\"center\">🧠 DevTrack Server</h1>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nazmisani/DevTrack_Server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/nazmisani/DevTrack_Server/issues"
+  },
+  "homepage": "https://github.com/nazmisani/DevTrack_Server#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "pg": "^8.16.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.15.18",
+    "typescript": "^5.8.3"
+  }
+}
