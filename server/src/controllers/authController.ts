@@ -1,11 +1,11 @@
 import { PrismaClient } from "@prisma/client";
 import { NextFunction, Request, Response } from "express";
 import { comparePassword, hashPassword } from "../helpers/bcrypt";
-import { signToken, verifyToken } from "../helpers/jwt";
+import { signToken } from "../helpers/jwt";
 
 const prisma = new PrismaClient();
 
-export default class authController {
+export default class AuthController {
   static async register(req: Request, res: Response, next: NextFunction) {
     try {
       const { name, email, password } = req.body;
