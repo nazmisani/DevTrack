@@ -1,9 +1,10 @@
-// src/routers/authRouter.ts
-import { Router } from "express";
-import AuthController from "../controllers/authController";
-const router = Router();
+// src/routers/index.ts
+const express = require("express");
+const router = express.Router();
 
-router.post("/login", AuthController.login);
-router.post("/register", AuthController.register);
+import AuthController from "../controllers/authController";
+
+router.post("/auth/login", AuthController.login);
+router.post("/auth/register", AuthController.register);
 
 export default router;

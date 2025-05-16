@@ -38,7 +38,6 @@ class AuthController {
         },
       });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -55,10 +54,11 @@ class AuthController {
         },
       });
 
-      if (!user) throw { name: "LoginError" };
+      if (!user) throw { name: "LoginErrorUser" };
 
-      if (!comparePassword(password, user.password))
-        throw { name: "LoginError" };
+      if (!comparePassword(password, user.password)) {
+        throw { name: "LoginErrorPass" };
+      }
 
       const payload = {
         id: user.id,
@@ -72,7 +72,6 @@ class AuthController {
         token: token,
       });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }

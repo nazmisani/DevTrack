@@ -3,7 +3,10 @@
   "license": "MIT",
   "scripts": {
     "queries": "ts-node ./src/queries.ts",
-    "caching": "ts-node ./src/caching.ts"
+    "caching": "ts-node ./src/caching.ts",
+    "dev": "ts-node ./src/server.ts",
+    "start": "node ./dist/server.js",
+    "build": "tsc"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
