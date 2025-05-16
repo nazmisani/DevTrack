@@ -5,16 +5,20 @@ import { signToken } from "../helpers/jwt";
 
 const prisma = new PrismaClient();
 
-export default class AuthController {
+class AuthController {
   static async register(req: Request, res: Response, next: NextFunction) {
     try {
       const { name, email, password } = req.body;
 
       if (!name || !email || !password) {
-        res.status(400).json({ message: "All fields are required" });
+        return res.status(400).json({ message: "All fields are required" });
       }
 
-      const existingEmail = await prisma.user.findUnique({ where: email });
+      const existingEmail = await prisma.user.findUnique({
+        where: {
+          email: email,
+        },
+      });
 
       if (existingEmail) {
         return res.status(409).json({ message: "Email already in use" });
@@ -45,7 +49,11 @@ export default class AuthController {
 
       if (!email || !password) throw { name: "BadRequest" };
 
-      const user = await prisma.user.findUnique({ where: email });
+      const user = await prisma.user.findUnique({
+        where: {
+          email: email,
+        },
+      });
 
       if (!user) throw { name: "LoginError" };
 
@@ -69,3 +77,5 @@ export default class AuthController {
     }
   }
 }
+
+export default AuthController;
