@@ -4,7 +4,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export const authentication = async (
+const authentication = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -41,3 +41,5 @@ export const authentication = async (
     res.status(401).json({ message: "Unauthorized" });
   }
 };
+
+export default authentication;
