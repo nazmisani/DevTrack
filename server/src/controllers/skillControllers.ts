@@ -28,7 +28,18 @@ class skillController {
       const { userId } = req.params;
       const { name, category, status } = req.body;
 
-      res.status(201);
+      await prisma.skill.create({
+        data: {
+          name: name,
+          category: category,
+          status: status,
+          userId: Number(userId), // Connect the skill to the user
+        },
+      });
+
+      res.status(201).json({
+        message: "success create skill",
+      });
     } catch (error) {
       console.log(error);
     }
