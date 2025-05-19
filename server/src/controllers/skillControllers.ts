@@ -50,7 +50,25 @@ class skillController {
 
   static async updateSkill(req: Request, res: Response, next: NextFunction) {
     try {
+      const id = req.params?.id;
       const userId = req.loginInfo?.userId;
+
+      const { name, category, status } = req.body;
+
+      const skill = await prisma.skill.findUnique({
+        where: {
+          id: Number(id),
+        },
+      });
+
+      await prisma.skill.update({
+        where: { id: Number(id) },
+        data: {
+          name,
+          category,
+          status,
+        },
+      });
     } catch (error) {
       next(error);
     }
