@@ -69,6 +69,10 @@ class skillController {
           status,
         },
       });
+
+      res.status(201).json({
+        message: "skill updated",
+      });
     } catch (error) {
       next(error);
     }
