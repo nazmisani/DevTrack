@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-
 import { Request, Response, NextFunction } from "express";
 
 const prisma = new PrismaClient();
@@ -8,18 +7,18 @@ class skillController {
   static async getSkill(req: Request, res: Response, next: NextFunction) {
     try {
       const userId = req.loginInfo?.userId;
+      if (!userId) throw new Error("Unauthorized");
 
-      const skill = prisma.skill.findMany({
+      const skills = await prisma.skill.findMany({
         where: {
           userId: Number(userId),
         },
       });
 
-      res.status(201).json({
-        data: skill,
+      return res.status(200).json({
+        data: skills,
       });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -27,23 +26,23 @@ class skillController {
   static async addSkill(req: Request, res: Response, next: NextFunction) {
     try {
       const userId = req.loginInfo?.userId;
+      if (!userId) throw new Error("Unauthorized");
 
       const { name, category, status } = req.body;
 
       await prisma.skill.create({
         data: {
-          name: name,
-          category: category,
-          status: status,
-          userId: Number(userId), // Connect the skill to the user
+          name,
+          category,
+          status,
+          userId: Number(userId),
         },
       });
 
-      res.status(201).json({
+      return res.status(201).json({
         message: "success create skill",
       });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -52,6 +51,15 @@ class skillController {
     try {
       const id = req.params?.id;
       const userId = req.loginInfo?.userId;
+      if (!id || !userId) throw new Error("Invalid request");
+
+      const skill = await prisma.skill.findUnique({
+        where: { id: Number(id) },
+      });
+
+      if (!skill || skill.userId !== Number(userId)) {
+        return res.status(403).json({ message: "Forbidden" });
+      }
 
       const { name, category, status } = req.body;
 
@@ -64,7 +72,7 @@ class skillController {
         },
       });
 
-      res.status(201).json({
+      return res.status(200).json({
         message: "skill updated",
       });
     } catch (error) {
