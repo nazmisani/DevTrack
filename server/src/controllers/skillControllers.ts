@@ -79,6 +79,39 @@ class skillController {
       next(error);
     }
   }
+
+  static async deleteSkill(req: Request, res: Response, next: NextFunction) {
+    try {
+      const id = req.params?.id;
+      const userId = req.loginInfo?.userId;
+
+      if (!id || isNaN(Number(id)) || !userId) {
+        throw new Error("Invalid request");
+      }
+
+      const skill = await prisma.skill.findUnique({
+        where: { id: Number(id) },
+      });
+
+      if (!skill) {
+        return res.status(404).json({ message: "Skill not found" });
+      }
+
+      if (skill.userId !== Number(userId)) {
+        return res.status(403).json({ message: "Forbidden: Not your skill" });
+      }
+
+      await prisma.skill.delete({
+        where: { id: Number(id) },
+      });
+
+      return res.status(200).json({
+        message: "Skill deleted successfully",
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default skillController;
