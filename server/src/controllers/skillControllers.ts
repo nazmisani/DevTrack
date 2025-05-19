@@ -55,12 +55,6 @@ class skillController {
 
       const { name, category, status } = req.body;
 
-      const skill = await prisma.skill.findUnique({
-        where: {
-          id: Number(id),
-        },
-      });
-
       await prisma.skill.update({
         where: { id: Number(id) },
         data: {
