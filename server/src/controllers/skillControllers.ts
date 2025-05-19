@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 class skillController {
   static async getSkill(req: Request, res: Response, next: NextFunction) {
     try {
-      const { userId } = req.params;
+      const userId = req.loginInfo?.userId;
 
       const skill = prisma.skill.findMany({
         where: {
@@ -25,7 +25,8 @@ class skillController {
 
   static async addSkill(req: Request, res: Response, next: NextFunction) {
     try {
-      const { userId } = req.params;
+      const userId = req.loginInfo?.userId;
+
       const { name, category, status } = req.body;
 
       await prisma.skill.create({

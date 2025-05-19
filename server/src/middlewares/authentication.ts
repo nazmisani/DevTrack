@@ -31,6 +31,7 @@ const authentication = async (
     if (!user) throw { name: "Unauthorized" };
 
     req.loginInfo = {
+      userId: user.id,
       email: user.email,
       name: user.name,
     };
