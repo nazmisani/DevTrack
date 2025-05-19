@@ -20,6 +20,7 @@ class skillController {
       });
     } catch (error) {
       console.log(error);
+      next(error);
     }
   }
 
@@ -43,6 +44,15 @@ class skillController {
       });
     } catch (error) {
       console.log(error);
+      next(error);
+    }
+  }
+
+  static async updateSkill(req: Request, res: Response, next: NextFunction) {
+    try {
+      const userId = req.loginInfo?.userId;
+    } catch (error) {
+      next(error);
     }
   }
 }
