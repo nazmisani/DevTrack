@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from "express";
 
 const prisma = new PrismaClient();
 
-class skillController {
+class SkillController {
   static async getSkill(req: Request, res: Response, next: NextFunction) {
     try {
       const userId = req.loginInfo?.userId;
@@ -114,4 +114,4 @@ class skillController {
   }
 }
 
-export default skillController;
+export default SkillController;
