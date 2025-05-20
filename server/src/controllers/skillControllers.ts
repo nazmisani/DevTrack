@@ -6,7 +6,8 @@ const prisma = new PrismaClient();
 class SkillController {
   static async getSkill(req: Request, res: Response, next: NextFunction) {
     try {
-      const userId = req.loginInfo?.userId;
+      const { userId } = req.loginInfo;
+
       if (!userId) throw new Error("Unauthorized");
 
       const skills = await prisma.skill.findMany({
@@ -25,7 +26,7 @@ class SkillController {
 
   static async addSkill(req: Request, res: Response, next: NextFunction) {
     try {
-      const userId = req.loginInfo?.userId;
+      const { userId } = req.loginInfo;
       if (!userId) throw new Error("Unauthorized");
 
       const { name, category, status } = req.body;
@@ -50,7 +51,8 @@ class SkillController {
   static async updateSkill(req: Request, res: Response, next: NextFunction) {
     try {
       const id = req.params?.id;
-      const userId = req.loginInfo?.userId;
+      const { userId } = req.loginInfo;
+
       if (!id || !userId) throw new Error("Invalid request");
 
       const skill = await prisma.skill.findUnique({
@@ -83,7 +85,7 @@ class SkillController {
   static async deleteSkill(req: Request, res: Response, next: NextFunction) {
     try {
       const id = req.params?.id;
-      const userId = req.loginInfo?.userId;
+      const { userId } = req.loginInfo;
 
       if (!id || isNaN(Number(id)) || !userId) {
         throw new Error("Invalid request");
