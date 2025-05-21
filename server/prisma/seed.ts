@@ -1,15 +1,19 @@
 import { PrismaClient } from "@prisma/client";
+import { hashPassword } from "../src/helpers/bcrypt";
+
 const prisma = new PrismaClient();
 
 async function main() {
+  // Hashing password untuk semua user
+  const plainPassword = "123456";
+  const hashedPassword = hashPassword(plainPassword);
+
   // Seed Users
   const users = await prisma.user.createMany({
     data: [
-      { name: "Nouval", email: "nouval@mail.com", password: "hashed1" },
-      { name: "Ayu", email: "ayu@mail.com", password: "hashed2" },
-      { name: "Dimas", email: "dimas@mail.com", password: "hashed3" },
-      { name: "Rina", email: "rina@mail.com", password: "hashed4" },
-      { name: "Andi", email: "andi@mail.com", password: "hashed5" },
+      { name: "Nouval", email: "nouval@mail.com", password: hashedPassword },
+      { name: "Ayu", email: "dasha@mail.com", password: hashedPassword },
+      { name: "Dimas", email: "emma@mail.com", password: hashedPassword },
     ],
   });
 
