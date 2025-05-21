@@ -29,7 +29,7 @@ class SkillController {
   static async addSkill(req: Request, res: Response, next: NextFunction) {
     try {
       const { userId } = req.loginInfo;
-      if (!userId) throw new Error("Unauthorized");
+      if (!userId) throw { name: "Unauthorized" };
 
       const { name, category, status } = req.body;
 
