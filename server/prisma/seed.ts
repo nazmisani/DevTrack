@@ -11,9 +11,21 @@ async function main() {
   // Seed Users
   const users = await prisma.user.createMany({
     data: [
-      { name: "Nouval", email: "nouval@mail.com", password: hashedPassword },
-      { name: "Ayu", email: "dasha@mail.com", password: hashedPassword },
-      { name: "Dimas", email: "emma@mail.com", password: hashedPassword },
+      {
+        name: "Nouval Nazmi",
+        email: "nouval@mail.com",
+        password: hashedPassword,
+      },
+      {
+        name: "Dasha Taran",
+        email: "taran@mail.com",
+        password: hashedPassword,
+      },
+      {
+        name: "Emma Myers",
+        email: "emmamyers@mail.com",
+        password: hashedPassword,
+      },
     ],
   });
 
