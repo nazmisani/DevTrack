@@ -1,29 +1,39 @@
 import { Request, Response, NextFunction } from "express";
 
 const errorHandler = (
-  err: any,
+  error: any,
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   let status = 500;
   let message = "Internal Server Error";
-
-  if (err.name === "Unauthorized") {
-    status = 401;
-    message = "Unauthorized";
-  } else if (err.name === "LoginError") {
-    status = 401;
-    message = "Invalid email or password";
-  } else if (err.name === "BadRequest") {
+  if (error.name === "BadRequest") {
+    message = "Please input email or password";
     status = 400;
-    message = "Bad Request";
-  } else if (err.name === "Nothing") {
-    status = 404;
-    message = "Not Found";
   }
 
-  res.status(status).json({ message });
+  if (error.name === "LoginError") {
+    message = "Invalid email or password";
+    status = 401;
+  }
+  if (error.name === "Unauthorized" || error.name === "JsonWebTokenError") {
+    message = "Please login first";
+    status = 401;
+  }
+  if (error.name === "Forbidden") {
+    message = "You dont have any access";
+    status = 403;
+  }
+
+  if (error.name === "NotFound") {
+    status = 404;
+    message = `Data not found`;
+  }
+
+  res.status(status).json({
+    message,
+  });
 };
 
 export default errorHandler;

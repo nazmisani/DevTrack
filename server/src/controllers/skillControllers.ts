@@ -8,7 +8,8 @@ class SkillController {
     try {
       const { userId } = req.loginInfo;
 
-      if (!userId) throw new Error("Unauthorized");
+      if (!userId) throw { name: "Unauthorized" };
+
       const skills = await prisma.skill.findMany({
         where: {
           userId: Number(userId),
