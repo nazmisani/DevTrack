@@ -14,8 +14,8 @@ router.use(authentication);
 
 router.get("/skills", SkillController.getSkill);
 router.post("/skills", SkillController.addSkill);
-router.put("/skills/:id", SkillController.deleteSkill);
-router.delete("/skills/:id", SkillController.updateSkill);
+router.put("/skills/:id", SkillController.updateSkill);
+router.delete("/skills/:id", SkillController.deleteSkill);
 
 router.use(errorHandler);
 
