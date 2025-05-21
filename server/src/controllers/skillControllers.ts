@@ -19,11 +19,11 @@ class SkillController {
       if (!skills) throw { name: "Nothing" };
 
       return res.status(200).json({
+        message: "success",
         data: skills,
       });
     } catch (error) {
       console.log(error);
-
       next(error);
     }
   }
