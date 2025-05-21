@@ -9,7 +9,7 @@ async function main() {
   const hashedPassword = hashPassword(plainPassword);
 
   // Seed Users
-  const users = await prisma.user.createMany({
+  await prisma.user.createMany({
     data: [
       {
         name: "Nouval Nazmi",
