@@ -9,19 +9,24 @@ class ProjectController {
     try {
       const { userId } = req.loginInfo;
 
-      const project = await prisma.project.findMany({
+      if (!userId || isNaN(Number(userId))) {
+        return res.status(400).json({ message: "Invalid user ID" });
+      }
+
+      const projects = await prisma.project.findMany({
         where: { userId: Number(userId) },
       });
 
-      res.status(201).json({
+      return res.status(200).json({
         message: "Success get data",
-        data: project,
+        data: projects,
       });
     } catch (error) {
       console.log(error);
       next(error);
     }
   }
+
   static async getProjectDetail(
     req: Request,
     res: Response,
