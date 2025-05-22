@@ -7,6 +7,7 @@ const prisma = new PrismaClient();
 class ProjectController {
   static async getProject(req: Request, res: Response, next: NextFunction) {
     try {
+      const { userId } = req.loginInfo;
     } catch (error) {
       console.log(error);
       next(error);
