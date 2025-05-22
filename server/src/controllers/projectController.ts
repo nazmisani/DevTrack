@@ -8,6 +8,15 @@ class ProjectController {
   static async getProject(req: Request, res: Response, next: NextFunction) {
     try {
       const { userId } = req.loginInfo;
+
+      const project = await prisma.project.findMany({
+        where: { userId: Number(userId) },
+      });
+
+      res.status(201).json({
+        message: "Success get data",
+        data: project,
+      });
     } catch (error) {
       console.log(error);
       next(error);
