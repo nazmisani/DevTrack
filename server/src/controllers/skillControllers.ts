@@ -26,6 +26,32 @@ class SkillController {
     }
   }
 
+  static async getSkillDetail(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const { userId } = req.loginInfo;
+
+      if (!userId) throw { name: "Unauthorized" };
+
+      const skill = await prisma.skill.findFirst({
+        where: {
+          userId: Number(userId),
+          id: Number(id),
+        },
+      });
+
+      if (!skill) throw { name: "NotFound" };
+
+      return res.status(200).json({
+        message: "success",
+        data: skill,
+      });
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
+
   static async addSkill(req: Request, res: Response, next: NextFunction) {
     try {
       const { userId } = req.loginInfo;

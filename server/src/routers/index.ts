@@ -13,6 +13,7 @@ router.post("/auth/register", AuthController.register);
 router.use(authentication);
 
 router.get("/skills", SkillController.getSkill);
+router.get("/skill/:id", SkillController.getSkillDetail);
 router.post("/skills", SkillController.addSkill);
 router.put("/skills/:id", SkillController.updateSkill);
 router.delete("/skills/:id", SkillController.deleteSkill);
