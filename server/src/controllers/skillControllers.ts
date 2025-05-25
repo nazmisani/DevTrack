@@ -78,7 +78,7 @@ class SkillController {
 
   static async updateSkill(req: Request, res: Response, next: NextFunction) {
     try {
-      const id = req.params?.id;
+      const { id } = req.params;
       const { userId } = req.loginInfo;
 
       if (!id || !userId) throw new Error("Invalid request");
@@ -112,7 +112,7 @@ class SkillController {
 
   static async deleteSkill(req: Request, res: Response, next: NextFunction) {
     try {
-      const id = req.params?.id;
+      const { id } = req.params;
       const { userId } = req.loginInfo;
 
       if (!id || isNaN(Number(id)) || !userId) {
