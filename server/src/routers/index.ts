@@ -5,6 +5,7 @@ const router = express.Router();
 import AuthController from "../controllers/authController";
 import SkillController from "../controllers/skillControllers";
 import TagController from "../controllers/tagController";
+import ProjectController from "../controllers/projectController";
 import authentication from "../middlewares/authentication";
 import errorHandler from "../middlewares/errorHandler";
 
@@ -18,6 +19,8 @@ router.get("/skill/:id", SkillController.getSkillDetail);
 router.post("/skills", SkillController.addSkill);
 router.put("/skills/:id", SkillController.updateSkill);
 router.delete("/skills/:id", SkillController.deleteSkill);
+
+router.get("/project", ProjectController.getProject);
 
 router.get("/tags", TagController.getTags);
 router.get("/tag/:id", TagController.getTagDetail);
