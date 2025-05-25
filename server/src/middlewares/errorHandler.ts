@@ -8,6 +8,7 @@ const errorHandler = (
 ) => {
   let status = 500;
   let message = "Internal Server Error";
+
   if (error.name === "BadRequest") {
     message = "Please input email or password";
     status = 400;
