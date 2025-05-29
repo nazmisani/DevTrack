@@ -24,7 +24,7 @@ class TagController {
 
   static async getTagDetail(req: Request, res: Response, next: NextFunction) {
     try {
-      const id = req.params.id;
+      const { id } = req.params;
       const { userId } = req.loginInfo;
 
       if (!userId) throw { name: "Unauthorized" };
